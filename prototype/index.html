@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LastMile Lab | Concept 2 Visual Prototype</title>
+  <style>
+    :root {
+      --lm-navy: #173B57;
+      --lm-teal: #0F766E;
+      --lm-accent: #4FD1C5;
+      --lm-canvas: #F6F8FA;
+      --lm-surface: #FFFFFF;
+      --lm-muted: #586879;
+      --lm-border: #E0E4E8;
+      --lm-shadow: rgba(0, 0, 0, 0.08);
+      --lm-radius: 14px;
+      --lm-radius-sm: 8px;
+      --lm-spacing-xs: 8px;
+      --lm-spacing-sm: 16px;
+      --lm-spacing-md: 24px;
+      --lm-spacing-lg: 32px;
+      --lm-spacing-xl: 48px;
+      --lm-spacing-hero: 64px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      background: var(--lm-canvas);
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      color: var(--lm-navy);
+      background: var(--lm-canvas);
+      line-height: 1.5;
+      font-size: 1rem;
+    }
+
+    /* Layout structure */
+    .lm-container {
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .lm-sidebar {
+      width: 272px;
+      background: var(--lm-navy);
+      color: var(--lm-surface);
+      padding: var(--lm-spacing-md);
+      flex-shrink: 0;
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .lm-sidebar-logo {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      margin-bottom: var(--lm-spacing-lg);
+      opacity: 0.7;
+    }
+
+    .lm-sidebar-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      opacity: 0.5;
+      margin-top: var(--lm-spacing-lg);
+      margin-bottom: var(--lm-spacing-sm);
+    }
+
+    .lm-sidebar-item {
+      font-size: 0.875rem;
+      padding: var(--lm-spacing-xs) 0;
+      opacity: 0.9;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .lm-sidebar-item:hover {
+      opacity: 1;
+    }
+
+    .lm-sidebar-item.active {
+      opacity: 1;
+      font-weight: 500;
+      color: var(--lm-accent);
+    }
+
+    .lm-main {
+      flex: 1;
+      background: var(--lm-canvas);
+      overflow-x: hidden;
+    }
+
+    /* Hero section */
+    .lm-hero {
+      background: linear-gradient(135deg, var(--lm-navy) 0%, #0f4f6b 100%);
+      color: var(--lm-surface);
+      padding: var(--lm-spacing-xl) var(--lm-spacing-md);
+      position: relative;
+      overflow: hidden;
+      min-height: 480px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .lm-hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--lm-accent) 0%, transparent 70%);
+      opacity: 0.08;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    .lm-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 var(--lm-spacing-md);
+    }
+
+    .lm-hero-kicker {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      opacity: 0.8;
+      margin-bottom: var(--lm-spacing-md);
+    }
+
+    .lm-hero-title {
+      font-size: 2.5rem;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: var(--lm-spacing-md);
+    }
+
+    .lm-hero-intro {
+      font-size: 1.125rem;
+      opacity: 0.9;
+      line-height: 1.6;
+      max-width: 720px;
+    }
+
+    /* Section structure */
+    section {
+      padding: var(--lm-spacing-xl) var(--lm-spacing-md);
+      max-width: 100%;
+    }
+
+    section > * {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .lm-section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--lm-navy);
+      margin-bottom: var(--lm-spacing-md);
+    }
+
+    .lm-section-subtitle {
+      font-size: 1rem;
+      color: var(--lm-muted);
+      margin-bottom: var(--lm-spacing-lg);
+      line-height: 1.6;
+    }
+
+    /* Diagram section */
+    .lm-diagram-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: var(--lm-spacing-lg) 0;
+      background: var(--lm-surface);
+      border-radius: var(--lm-radius);
+      border: 1px solid var(--lm-border);
+    }
+
+    .lm-diagram-svg {
+      max-width: 100%;
+      height: auto;
+    }
+
+    .lm-diagram-caption {
+      font-size: 0.875rem;
+      color: var(--lm-muted);
+      margin-top: var(--lm-spacing-md);
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    /* Concept cards grid */
+    .lm-concepts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--lm-spacing-md);
+      margin-top: var(--lm-spacing-lg);
+    }
+
+    .lm-concept-card {
+      background: var(--lm-surface);
+      border: 1px solid var(--lm-border);
+      border-radius: var(--lm-radius);
+      padding: var(--lm-spacing-md);
+      transition: all 0.2s ease;
+    }
+
+    .lm-concept-card:hover {
+      border-color: var(--lm-teal);
+      box-shadow: 0 8px 24px var(--lm-shadow);
+    }
+
+    .lm-concept-card-title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--lm-navy);
+      margin-bottom: var(--lm-spacing-sm);
+      display: flex;
+      align-items: center;
+      gap: var(--lm-spacing-xs);
+    }
+
+    .lm-concept-card-icon {
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: var(--lm-accent);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .lm-concept-card-text {
+      font-size: 0.95rem;
+      color: var(--lm-muted);
+      line-height: 1.6;
+      margin-bottom: var(--lm-spacing-sm);
+    }
+
+    .lm-concept-card-tip {
+      font-size: 0.875rem;
+      color: var(--lm-teal);
+      background: rgba(15, 118, 110, 0.05);
+      padding: var(--lm-spacing-sm);
+      border-radius: var(--lm-radius-sm);
+      border-left: 3px solid var(--lm-teal);
+      font-style: italic;
+    }
+
+    /* Proof snapshot section */
+    .lm-proof {
+      background: var(--lm-surface);
+      border: 1px solid var(--lm-border);
+      border-radius: var(--lm-radius);
+      padding: var(--lm-spacing-lg);
+      text-align: center;
+    }
+
+    .lm-proof-kicker {
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--lm-teal);
+      margin-bottom: var(--lm-spacing-md);
+    }
+
+    .lm-proof-result {
+      font-size: 2.25rem;
+      font-weight: 700;
+      color: var(--lm-navy);
+      margin: var(--lm-spacing-md) 0;
+      font-family: 'Courier New', monospace;
+    }
+
+    .lm-proof-comparison {
+      display: flex;
+      justify-content: center;
+      gap: var(--lm-spacing-lg);
+      margin: var(--lm-spacing-lg) 0;
+      flex-wrap: wrap;
+    }
+
+    .lm-proof-metric {
+      text-align: center;
+    }
+
+    .lm-proof-metric-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--lm-muted);
+      margin-bottom: var(--lm-spacing-xs);
+    }
+
+    .lm-proof-metric-value {
+      font-size: 1.875rem;
+      font-weight: 700;
+      color: var(--lm-navy);
+      font-family: 'Courier New', monospace;
+    }
+
+    .lm-proof-metric.optimized .lm-proof-metric-value {
+      color: var(--lm-teal);
+    }
+
+    .lm-proof-tech {
+      font-size: 0.8rem;
+      color: var(--lm-muted);
+      margin-top: var(--lm-spacing-md);
+      font-style: italic;
+    }
+
+    /* CTA section */
+    .lm-cta-wrapper {
+      text-align: center;
+      padding: var(--lm-spacing-lg) 0;
+    }
+
+    .lm-cta-button {
+      display: inline-block;
+      background: var(--lm-teal);
+      color: var(--lm-surface);
+      padding: 14px 48px;
+      border-radius: var(--lm-radius);
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(15, 118, 110, 0.15);
+    }
+
+    .lm-cta-button:hover {
+      background: #0d5f61;
+      box-shadow: 0 4px 16px rgba(15, 118, 110, 0.25);
+      transform: translateY(-2px);
+    }
+
+    .lm-cta-button:active {
+      transform: translateY(0);
+    }
+
+    /* Scenario cards */
+    .lm-scenarios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--lm-spacing-lg);
+      margin-top: var(--lm-spacing-lg);
+    }
+
+    .lm-scenario-card {
+      background: var(--lm-surface);
+      border: 1px solid var(--lm-border);
+      border-radius: var(--lm-radius);
+      padding: var(--lm-spacing-lg);
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .lm-scenario-card:hover {
+      border-color: var(--lm-teal);
+      box-shadow: 0 8px 24px var(--lm-shadow);
+      transform: translateY(-4px);
+    }
+
+    .lm-scenario-card.active {
+      border-color: var(--lm-teal);
+      background: rgba(15, 118, 110, 0.02);
+    }
+
+    .lm-scenario-name {
+      font-size: 1.125rem;
+      font-weight: 600;
+      color: var(--lm-navy);
+      margin-bottom: var(--lm-spacing-md);
+    }
+
+    .lm-scenario-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--lm-spacing-md);
+      margin-bottom: var(--lm-spacing-lg);
+      padding-bottom: var(--lm-spacing-md);
+      border-bottom: 1px solid var(--lm-border);
+    }
+
+    .lm-scenario-meta-item {
+      font-size: 0.875rem;
+    }
+
+    .lm-scenario-meta-label {
+      color: var(--lm-muted);
+      font-weight: 500;
+      margin-bottom: var(--lm-spacing-xs);
+    }
+
+    .lm-scenario-meta-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--lm-navy);
+      font-family: 'Courier New', monospace;
+    }
+
+    /* Live meter */
+    .lm-meter-comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--lm-spacing-md);
+      margin-bottom: var(--lm-spacing-lg);
+    }
+
+    .lm-meter-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .lm-meter-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--lm-muted);
+      margin-bottom: var(--lm-spacing-xs);
+    }
+
+    .lm-meter-bar {
+      height: 24px;
+      background: var(--lm-canvas);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .lm-meter-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--lm-navy) 0%, var(--lm-navy) 100%);
+      transition: width 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 8px;
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: var(--lm-surface);
+    }
+
+    .lm-meter-fill.optimized {
+      background: linear-gradient(90deg, var(--lm-teal) 0%, var(--lm-accent) 100%);
+    }
+
+    .lm-meter-value {
+      font-size: 0.875rem;
+      color: var(--lm-navy);
+      font-weight: 600;
+      margin-top: var(--lm-spacing-xs);
+    }
+
+    /* Scenario button */
+    .lm-scenario-button {
+      width: 100%;
+      background: var(--lm-navy);
+      color: var(--lm-surface);
+      border: none;
+      padding: 12px 16px;
+      border-radius: var(--lm-radius-sm);
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .lm-scenario-button:hover {
+      background: #0f2d45;
+    }
+
+    .lm-scenario-card.active .lm-scenario-button {
+      background: var(--lm-teal);
+    }
+
+    /* Model logic section */
+    .lm-model {
+      background: var(--lm-surface);
+      border: 1px solid var(--lm-border);
+      border-radius: var(--lm-radius);
+    }
+
+    .lm-model-content {
+      padding: var(--lm-spacing-lg);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .lm-model-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--lm-navy);
+      margin-bottom: var(--lm-spacing-lg);
+    }
+
+    .lm-model-subsection {
+      margin-bottom: var(--lm-spacing-lg);
+    }
+
+    .lm-model-subsection-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--lm-navy);
+      margin-bottom: var(--lm-spacing-sm);
+    }
+
+    .lm-model-list {
+      list-style: none;
+      font-size: 0.9rem;
+      color: var(--lm-muted);
+      line-height: 1.8;
+    }
+
+    .lm-model-list li {
+      padding: var(--lm-spacing-xs) 0;
+      padding-left: 24px;
+      position: relative;
+    }
+
+    .lm-model-list li::before {
+      content: '•';
+      position: absolute;
+      left: 0;
+      color: var(--lm-teal);
+      font-weight: bold;
+    }
+
+    .lm-model-formula {
+      background: var(--lm-canvas);
+      padding: var(--lm-spacing-md);
+      border-radius: var(--lm-radius-sm);
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      color: var(--lm-navy);
+      overflow-x: auto;
+      margin: var(--lm-spacing-md) 0;
+    }
+
+    /* Methodology section */
+    .lm-methodology {
+      background: linear-gradient(135deg, rgba(15, 118, 110, 0.05) 0%, rgba(79, 209, 197, 0.05) 100%);
+      border: 1px solid rgba(15, 118, 110, 0.1);
+    }
+
+    .lm-methodology-content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--lm-spacing-lg);
+    }
+
+    .lm-methodology-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--lm-navy);
+      margin-bottom: var(--lm-spacing-md);
+    }
+
+    .lm-methodology-text {
+      font-size: 0.95rem;
+      color: var(--lm-muted);
+      line-height: 1.6;
+      margin-bottom: var(--lm-spacing-md);
+    }
+
+    .lm-methodology-link {
+      color: var(--lm-teal);
+      text-decoration: none;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .lm-methodology-link:hover {
+      opacity: 0.8;
+    }
+
+    /* Footer */
+    .lm-footer {
+      background: var(--lm-navy);
+      color: var(--lm-surface);
+      padding: var(--lm-spacing-lg) var(--lm-spacing-md);
+      text-align: center;
+      font-size: 0.875rem;
+      opacity: 0.8;
+    }
+
+    /* Responsive */
+    @media (max-width: 1200px) {
+      .lm-scenarios-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .lm-container {
+        flex-direction: column;
+      }
+
+      .lm-sidebar {
+        width: 100%;
+        display: flex;
+        gap: var(--lm-spacing-lg);
+      }
+
+      .lm-sidebar-item {
+        flex: 1;
+      }
+
+      .lm-hero {
+        min-height: 320px;
+      }
+
+      .lm-hero-title {
+        font-size: 1.75rem;
+      }
+
+      .lm-concepts-grid,
+      .lm-scenarios-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lm-proof-comparison {
+        flex-direction: column;
+      }
+
+      section {
+        padding: var(--lm-spacing-lg) var(--lm-spacing-sm);
+      }
+    }
+
+    /* Tabs indicator (visual only) */
+    .lm-scenario-tab-indicator {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      color: var(--lm-accent);
+      margin-bottom: var(--lm-spacing-xs);
+    }
+  </style>
+</head>
+<body>
+  <div class="lm-container">
+    <!-- Sidebar -->
+    <aside class="lm-sidebar">
+      <div class="lm-sidebar-logo">LASTMILE LAB</div>
+      
+      <div>
+        <div class="lm-sidebar-title">WORKFLOW</div>
+        <div class="lm-sidebar-item active">Overview</div>
+        <div class="lm-sidebar-item">Scenarios</div>
+        <div class="lm-sidebar-item">Plan</div>
+      </div>
+
+      <div>
+        <div class="lm-sidebar-title">MODEL & METHODS</div>
+        <div class="lm-sidebar-item">Methodology</div>
+        <div class="lm-sidebar-item">Model Validation</div>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="lm-main">
+      <!-- Hero section -->
+      <section class="lm-hero">
+        <div class="lm-hero-content">
+          <div class="lm-hero-kicker">CAPACITATED VEHICLE ROUTING PROBLEM (CVRP)</div>
+          <h1 class="lm-hero-title">Optimize fleet routing to minimize travel distance under capacity constraints</h1>
+          <p class="lm-hero-intro">LastMile Lab models a static, single-depot Capacitated Vehicle Routing Problem (CVRP) for last-mile delivery. It determines how customer demand is assigned across vehicles and the sequence in which each route serves its customers.</p>
+        </div>
+      </section>
+
+      <!-- CVRP Diagram section -->
+      <section class="lm-diagram-section">
+        <div>
+          <h2 class="lm-section-title">How CVRP works</h2>
+          <div class="lm-diagram-wrapper">
+            <svg class="lm-diagram-svg" viewBox="0 0 800 400" width="800" height="400" xmlns="http://www.w3.org/2000/svg">
+              <!-- Depot (center left) -->
+              <circle cx="80" cy="200" r="24" fill="#173B57" stroke="#0F766E" stroke-width="3"/>
+              <text x="80" y="205" text-anchor="middle" font-size="12" font-weight="bold" fill="white">D</text>
+              
+              <!-- Vehicle 1 route (blue path) -->
+              <path d="M 104 180 Q 250 100 380 120 L 450 140" stroke="#173B57" stroke-width="2" fill="none" stroke-dasharray="4,4" opacity="0.6"/>
+              
+              <!-- Vehicle 2 route (teal path) -->
+              <path d="M 104 200 Q 280 200 400 240 L 480 260" stroke="#0F766E" stroke-width="2" fill="none" stroke-dasharray="4,4" opacity="0.6"/>
+              
+              <!-- Vehicle 3 route (accent path) -->
+              <path d="M 104 220 Q 250 320 360 300 L 450 280" stroke="#4FD1C5" stroke-width="2" fill="none" stroke-dasharray="4,4" opacity="0.6"/>
+              
+              <!-- Return paths to depot (lighter) -->
+              <path d="M 450 140 Q 300 180 104 190" stroke="#173B57" stroke-width="1.5" fill="none" stroke-dasharray="2,2" opacity="0.3"/>
+              <path d="M 480 260 Q 350 220 104 210" stroke="#0F766E" stroke-width="1.5" fill="none" stroke-dasharray="2,2" opacity="0.3"/>
+              <path d="M 450 280 Q 300 240 104 210" stroke="#4FD1C5" stroke-width="1.5" fill="none" stroke-dasharray="2,2" opacity="0.3"/>
+              
+              <!-- Customer nodes for route 1 -->
+              <circle cx="380" cy="120" r="16" fill="#173B57" opacity="0.3" stroke="#173B57" stroke-width="1.5"/>
+              <text x="380" y="126" text-anchor="middle" font-size="11" font-weight="600" fill="#173B57">1</text>
+              
+              <circle cx="450" cy="140" r="16" fill="#173B57" opacity="0.3" stroke="#173B57" stroke-width="1.5"/>
+              <text x="450" y="146" text-anchor="middle" font-size="11" font-weight="600" fill="#173B57">2</text>
+              
+              <!-- Customer nodes for route 2 -->
+              <circle cx="400" cy="240" r="16" fill="#0F766E" opacity="0.3" stroke="#0F766E" stroke-width="1.5"/>
+              <text x="400" y="246" text-anchor="middle" font-size="11" font-weight="600" fill="#0F766E">1</text>
+              
+              <circle cx="480" cy="260" r="16" fill="#0F766E" opacity="0.3" stroke="#0F766E" stroke-width="1.5"/>
+              <text x="480" y="266" text-anchor="middle" font-size="11" font-weight="600" fill="#0F766E">2</text>
+              
+              <!-- Customer nodes for route 3 -->
+              <circle cx="360" cy="300" r="16" fill="#4FD1C5" opacity="0.3" stroke="#4FD1C5" stroke-width="1.5"/>
+              <text x="360" y="306" text-anchor="middle" font-size="11" font-weight="600" fill="#4FD1C5">1</text>
+              
+              <circle cx="450" cy="280" r="16" fill="#4FD1C5" opacity="0.3" stroke="#4FD1C5" stroke-width="1.5"/>
+              <text x="450" y="286" text-anchor="middle" font-size="11" font-weight="600" fill="#4FD1C5">2</text>
+              
+              <!-- Legend -->
+              <text x="80" y="360" font-size="11" font-weight="600" fill="#173B57">Depot</text>
+              <text x="200" y="360" font-size="11" font-weight="600" fill="#586879">← Route 1</text>
+              <text x="350" y="360" font-size="11" font-weight="600" fill="#586879">← Route 2</text>
+              <text x="520" y="360" font-size="11" font-weight="600" fill="#586879">← Route 3</text>
+            </svg>
+          </div>
+          <p class="lm-diagram-caption">Illustrative CVRP structure: multiple vehicle routes leave one depot, each customer is served exactly once, and every used vehicle returns to the depot.</p>
+        </div>
+      </section>
+
+      <!-- Concept cards section -->
+      <section class="lm-concepts-section">
+        <div>
+          <h2 class="lm-section-title">Core concepts</h2>
+          <p class="lm-section-subtitle">Understanding the key principles of CVRP optimization</p>
+          <div class="lm-concepts-grid">
+            <!-- Routing objective -->
+            <div class="lm-concept-card">
+              <h3 class="lm-concept-card-title">
+                <span class="lm-concept-card-icon"></span>
+                Routing objective
+              </h3>
+              <p class="lm-concept-card-text">Minimize the total estimated distance travelled across all active vehicle routes while serving every customer.</p>
+              <div class="lm-concept-card-tip">The objective is to reduce combined fleet travel while satisfying the model's routing and capacity requirements.</div>
+            </div>
+
+            <!-- Capacity constraints -->
+            <div class="lm-concept-card">
+              <h3 class="lm-concept-card-title">
+                <span class="lm-concept-card-icon"></span>
+                Capacity constraints
+              </h3>
+              <p class="lm-concept-card-text">Each customer has an unsplit tote demand, and the total demand assigned to a vehicle cannot exceed its available capacity.</p>
+              <div class="lm-concept-card-tip">Each customer order remains on one vehicle, and the combined tote demand on that route must stay within vehicle capacity.</div>
+            </div>
+
+            <!-- Feasibility requirements -->
+            <div class="lm-concept-card">
+              <h3 class="lm-concept-card-title">
+                <span class="lm-concept-card-icon"></span>
+                Feasibility requirements
+              </h3>
+              <p class="lm-concept-card-text">Every customer must be served exactly once, and every active vehicle route starts and returns to the depot.</p>
+              <div class="lm-concept-card-tip">Depot: The common start and return location for all vehicle routes.</div>
+            </div>
+
+            <!-- Solution comparison -->
+            <div class="lm-concept-card">
+              <h3 class="lm-concept-card-title">
+                <span class="lm-concept-card-icon"></span>
+                Solution comparison
+              </h3>
+              <p class="lm-concept-card-text">Compare a deterministic nearest-neighbour baseline with an optimized route plan to evaluate the reduction in total fleet distance.</p>
+              <div class="lm-concept-card-tip">The baseline provides a transparent reference point for assessing the improvement achieved by the optimized plan.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Published proof snapshot -->
+      <section>
+        <div>
+          <h2 class="lm-section-title">Published result</h2>
+          <div class="lm-proof">
+            <div class="lm-proof-kicker">VIENNA STANDARD 24 · ROUTE COMPARISON</div>
+            <div class="lm-proof-result">122.4 km → 97.2 km</div>
+            <div class="lm-proof-comparison">
+              <div class="lm-proof-metric">
+                <div class="lm-proof-metric-label">Baseline</div>
+                <div class="lm-proof-metric-value">122.4</div>
+                <div style="font-size: 0.75rem; color: #586879; margin-top: 4px;">km</div>
+              </div>
+              <div style="display: flex; align-items: center; color: #4FD1C5; font-weight: 700;">→</div>
+              <div class="lm-proof-metric optimized">
+                <div class="lm-proof-metric-label">Optimized</div>
+                <div class="lm-proof-metric-value">97.2</div>
+                <div style="font-size: 0.75rem; color: #586879; margin-top: 4px;">km</div>
+              </div>
+            </div>
+            <div style="font-size: 1.5rem; font-weight: 700; color: var(--lm-teal); margin: var(--lm-spacing-lg) 0;">20.6% shorter</div>
+            <p class="lm-proof-tech">This comparison shows a feasible optimized plan for Vienna Standard 24; global optimality is not claimed.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA section -->
+      <section class="lm-cta-section">
+        <div class="lm-cta-wrapper">
+          <p style="color: var(--lm-muted); font-size: 0.95rem; margin-bottom: var(--lm-spacing-md);">Ready to explore different fleet and demand configurations?</p>
+          <button class="lm-cta-button" onclick="scrollToScenarios()">Choose a scenario</button>
+        </div>
+      </section>
+
+      <!-- Scenarios section -->
+      <section class="lm-scenarios-section" id="scenarios-section">
+        <div>
+          <h2 class="lm-section-title">Available scenarios</h2>
+          <p class="lm-section-subtitle">Choose a preset scenario, review its demand and fleet configuration, then run a route comparison.</p>
+          
+          <div class="lm-scenarios-grid" id="scenarios-grid">
+            <!-- Vienna Standard 24 -->
+            <div class="lm-scenario-card active" onclick="selectScenario(this, 'vienna')">
+              <div class="lm-scenario-tab-indicator">PRESET 1</div>
+              <h3 class="lm-scenario-name">Vienna Standard 24</h3>
+              <div class="lm-scenario-meta">
+                <div class="lm-scenario-meta-item">
+                  <div class="lm-scenario-meta-label">Customers</div>
+                  <div class="lm-scenario-meta-value">24</div>
+                </div>
+                <div class="lm-scenario-meta-item">
+                  <div class="lm-scenario-meta-label">Vehicles</div>
+                  <div class="lm-scenario-meta-value">4</div>
+                </div>
+              </div>
+              
+              <div class="lm-meter-comparison">
+                <div class="lm-meter-item">
+                  <div class="lm-meter-label">Baseline demand</div>
+                  <div class="lm-meter-bar">
+                    <div class="lm-meter-fill" style="width: 88%;">87.4%</div>
+                  </div>
+                  <div class="lm-meter-value">87.4 / 100</div>
+                </div>
+                <div class="lm-meter-item">
+                  <div class="lm-meter-label">Optimized demand</div>
+                  <div class="lm-meter-bar">
+                    <div class="lm-meter-fill optimized" style="width: 76%;">76.2%</div>
+                  </div>
+                  <div class="lm-meter-value">76.2 / 100</div>
+                </div>
+              </div>
+              
+              <button class="lm-scenario-button">View plan</button>
+            </div>
+
+            <!-- Tight Capacity 24 -->
+            <div class="lm-scenario-card" onclick="selectScenario(this, 'tight')">
+              <div class="lm-scenario-tab-indicator">PRESET 2</div>
+              <h3 class="lm-scenario-name">Tight Capacity 24</h3>
+              <div class="lm-scenario-meta">
+                <div class="lm-scenario-meta-item">
+                  <div class="lm-scenario-meta-label">Customers</div>
+                  <div class="lm-scenario-meta-value">24</div>
+                </div>
+                <div class="lm-scenario-meta-item">
+                  <div class="lm-scenario-meta-label">Vehicles</div>
+                  <div class="lm-scenario-meta-value">6</div>
+                </div>
+              </div>
+              
+              <div class="lm-meter-comparison">
+                <div class="lm-meter-item">
+                  <div class="lm-meter-label">Baseline demand</div>
+                  <div class="lm-meter-bar">
+                    <div class="lm-meter-fill" style="width: 95%;">94.8%</div>
+                  </div>
+                  <div class="lm-meter-value">94.8 / 100</div>
+                </div>
+                <div class="lm-meter-item">
+                  <div class="lm-meter-label">Optimized demand</div>
+                  <div class="lm-meter-bar">
+                    <div class="lm-meter-fill optimized" style="width: 82%;">81.6%</div>
+                  </div>
+                  <div class="lm-meter-value">81.6 / 100</div>
+                </div>
+              </div>
+              
+              <button class="lm-scenario-button">View plan</button>
+            </div>
+
+            <!-- Wide Geography 24 -->
+            <div class="lm-scenario-card" onclick="selectScenario(this, 'wide')">
+              <div class="lm-scenario-tab-indicator">PRESET 3</div>
+              <h3 class="lm-scenario-name">Wide Geography 24</h3>
+              <div class="lm-scenario-meta">
+                <div class="lm-scenario-meta-item">
+                  <div class="lm-scenario-meta-label">Customers</div>
+                  <div class="lm-scenario-meta-value">24</div>
+                </div>
+                <div class="lm-scenario-meta-item">
+                  <div class="lm-scenario-meta-label">Vehicles</div>
+                  <div class="lm-scenario-meta-value">3</div>
+                </div>
+              </div>
+              
+              <div class="lm-meter-comparison">
+                <div class="lm-meter-item">
+                  <div class="lm-meter-label">Baseline demand</div>
+                  <div class="lm-meter-bar">
+                    <div class="lm-meter-fill" style="width: 75%;">74.6%</div>
+                  </div>
+                  <div class="lm-meter-value">74.6 / 100</div>
+                </div>
+                <div class="lm-meter-item">
+                  <div class="lm-meter-label">Optimized demand</div>
+                  <div class="lm-meter-bar">
+                    <div class="lm-meter-fill optimized" style="width: 61%;">60.8%</div>
+                  </div>
+                  <div class="lm-meter-value">60.8 / 100</div>
+                </div>
+              </div>
+              
+              <button class="lm-scenario-button">View plan</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Model logic section (typography only) -->
+      <section class="lm-model">
+        <div class="lm-model-content">
+          <h2 class="lm-model-title">Model logic</h2>
+          
+          <div class="lm-model-subsection">
+            <h3 class="lm-model-subsection-title">Sets</h3>
+            <ul class="lm-model-list">
+              <li><strong>N</strong> – set of customers</li>
+              <li><strong>N₀</strong> – set of all nodes, including depot 0</li>
+              <li><strong>K</strong> – set of available vehicles</li>
+            </ul>
+          </div>
+
+          <div class="lm-model-subsection">
+            <h3 class="lm-model-subsection-title">Parameters</h3>
+            <ul class="lm-model-list">
+              <li><strong>d_ij</strong> – distance between node i and node j</li>
+              <li><strong>demand_i</strong> – demand (tote count) of customer i</li>
+              <li><strong>capacity_k</strong> – capacity of vehicle k</li>
+              <li><strong>Q_k</strong> – total capacity available for vehicle k</li>
+            </ul>
+          </div>
+
+          <div class="lm-model-subsection">
+            <h3 class="lm-model-subsection-title">Decision Variables</h3>
+            <ul class="lm-model-list">
+              <li><strong>x_ijk</strong> – binary: 1 if edge (i, j) is used by vehicle k; 0 otherwise</li>
+              <li><strong>u_i</strong> – subtour elimination (Miller–Tucker–Zemlin formulation)</li>
+              <li><strong>y_ik</strong> – binary: 1 if customer i is assigned to vehicle k; 0 otherwise</li>
+            </ul>
+          </div>
+
+          <div class="lm-model-subsection">
+            <h3 class="lm-model-subsection-title">Objective</h3>
+            <div class="lm-model-formula">minimize Σ_k Σ_i Σ_j (d_ij × x_ijk)</div>
+            <p style="font-size: 0.875rem; color: var(--lm-muted); margin-top: var(--lm-spacing-sm);">Minimize total distance traveled across all vehicles and routes.</p>
+          </div>
+
+          <div class="lm-model-subsection">
+            <h3 class="lm-model-subsection-title">Key Constraints</h3>
+            <ul class="lm-model-list">
+              <li><strong>Visit-once:</strong> Each customer i is visited by exactly one vehicle k</li>
+              <li><strong>Capacity:</strong> Σ_i (demand_i × y_ik) ≤ Q_k for all k</li>
+              <li><strong>Subtour:</strong> No subtours; routes start and end at depot 0</li>
+              <li><strong>Flow:</strong> Vehicle flow is continuous from depot through assigned customers back to depot</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Methodology section -->
+      <section class="lm-methodology">
+        <div class="lm-methodology-content">
+          <h2 class="lm-methodology-title">Learn more</h2>
+          <p class="lm-methodology-text">For detailed methodology, validation steps, and technical assumptions behind this implementation, visit the full <strong>Methodology</strong> page or explore the <strong>Model Validation</strong> tool to inspect individual solver runs.</p>
+          <a href="#" class="lm-methodology-link">Go to Methodology →</a>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="lm-footer">
+        © 2026 Syed Danish Ali · LastMile Lab
+      </footer>
+    </main>
+  </div>
+
+  <script src="data.js"></script>
+  <script>
+    function scrollToScenarios() {
+      const section = document.getElementById('scenarios-section');
+      section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function selectScenario(element, scenarioId) {
+      // Remove active class from all cards
+      document.querySelectorAll('.lm-scenario-card').forEach(card => {
+        card.classList.remove('active');
+      });
+      // Add active class to clicked card
+      element.classList.add('active');
+      
+      // Visual feedback: log the selection
+      console.log('[v0 prototype] Selected scenario:', scenarioId);
+    }
+
+    // Optional: Log page load
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('[v0 prototype] Concept 2 visual prototype loaded at desktop viewport (1440–1600px)');
+    });
+  </script>
+</body>
+</html>

@@ -14,3 +14,4 @@ data/runs/*.duckdb.wal
 !data/runs/.gitkeep
 .DS_Store
 Thumbs.db
+dist/
